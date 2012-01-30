@@ -1,0 +1,28 @@
+<%= scope.function_header([File.mtime(__FILE__)]) %>
+server {
+  listen      80;
+  server_name .cyberswat.com;
+  root        /var/www;
+  charset     utf-8;
+
+  location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
+    expires max;
+    add_header Pragma public;
+    add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+  }
+
+  location / {
+    index  index.html;
+    expires max;
+    add_header Pragma public;
+    add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+  }
+
+  error_page   500 502 503 504  /50x.html;
+  location = /50x.html {
+    root   /usr/share/nginx/html;
+  }
+
+}
+
+
