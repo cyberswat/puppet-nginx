@@ -5,6 +5,10 @@ server {
   root        /var/www;
   charset     utf-8;
 
+  if ($host = 'cyberswat.com' ) {
+    rewrite  ^/(.*)$  http://www.cyberswat.com/$1  permanent;
+  }
+ 
   location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
     expires max;
     add_header Pragma public;
