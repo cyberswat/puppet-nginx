@@ -17,7 +17,9 @@
 #  }
 #
 class nginx::config(
-  $master  = $fqdn
+  listen,
+  server_name,
+  root
 ) inherits nginx::params {
 
   file { $nginx::params::nginx_config:
@@ -40,6 +42,12 @@ class nginx::config(
     notify => Class["nginx::service"],
   }
 
+  file { $root:
+    ensure => directory,
+    owner => 'nginx',
+    group => 'nginx',
+    mode => 0755,
+  }
 
 }
 

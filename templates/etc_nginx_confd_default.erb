@@ -1,8 +1,8 @@
 <%= scope.function_header([File.mtime(__FILE__)]) %>
 server {
-  listen      80;
-  server_name .cyberswat.com;
-  root        /var/www;
+  listen      <%= listen %>;
+  server_name <%= server_name %>;
+  root        <%= root %>;
   charset     utf-8;
 
   if ($host = 'cyberswat.com' ) {
@@ -20,6 +20,9 @@ server {
     expires max;
     add_header Pragma public;
     add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+
+    auth_basic "Sekrit";
+    auth_basic_user_file /var/www/.htpasswd;
   }
 
   error_page   500 502 503 504  /50x.html;
